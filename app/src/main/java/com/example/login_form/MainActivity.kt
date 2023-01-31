@@ -12,6 +12,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.login_form.ui.theme.Login_FormTheme
+import androidx.compose.runtime.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.KeyboardType
+
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MyLoginForm() {
-
+    var userNameInput: String by remember { mutableStateOf("")}
     Column(){
         Text(
             modifier = Modifier.fillMaxWidth().padding(15.dp),
@@ -40,6 +47,16 @@ fun MyLoginForm() {
             fontSize = 24.sp,
             color = MaterialTheme.colors.primary,
             textAlign = TextAlign.Left,
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
+            value = userNameInput,
+            onValueChange = {userNameInput = it},
+            label = { Text(text = "Username")},
+            placeholder = { Text(text = "Enter user name")},
+            singleLine = true,
+            trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
     }
 }
