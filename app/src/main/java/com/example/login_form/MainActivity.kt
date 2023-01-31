@@ -17,6 +17,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.material.icons.outlined.Lock
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+
 
 
 class MainActivity : ComponentActivity() {
@@ -40,6 +44,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyLoginForm() {
     var userNameInput: String by remember { mutableStateOf("")}
+    var userPasswordInput: String by remember { mutableStateOf("")}
+    var showPassword by remember { mutableStateOf(false) }
+
     Column(){
         Text(
             modifier = Modifier.fillMaxWidth().padding(15.dp),
@@ -57,6 +64,19 @@ fun MyLoginForm() {
             singleLine = true,
             trailingIcon = { Icon(imageVector = Icons.Default.Email, contentDescription = "Email Icon") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
+            value = userPasswordInput,
+            onValueChange = {userPasswordInput = it},
+            label = { Text(text = "Password")},
+            placeholder = { Text(text = "Enter password")},
+            singleLine = true,
+            trailingIcon = { IconButton(onClick = { showPassword = !showPassword }) {
+                Icon(imageVector = Icons.Outlined.Lock, contentDescription = "Lock Icon") }
+            },
+            visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
     }
 }
