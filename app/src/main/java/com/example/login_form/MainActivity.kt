@@ -78,6 +78,12 @@ fun MyLoginForm() {
             visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier.fillMaxWidth().padding(10.dp)
+        ) {
+            Text(text = "Submit")
+        }
     }
 }
 
